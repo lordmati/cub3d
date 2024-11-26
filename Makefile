@@ -13,6 +13,8 @@ FILES_SRC         = main.c \
 					error_exit.c \
 					save_fd.c \
 					utils.c \
+					valid_info.c \
+					check_map.c \
 
 SRC               = $(addprefix $(SRC_DIR),$(FILES_SRC))
 OBJ_SRC           = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

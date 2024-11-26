@@ -14,6 +14,12 @@ static void free_struc(t_cub *game)
 		free(game->floor);
 	if(game->ceiling)
 		free(game->ceiling);
+	if(game->arr_ceiling)
+		free(game->arr_ceiling);
+	if(game->arr_floor)
+		free(game->arr_floor);
+	if(game->map)
+		free_matrix(game->map);
 	return;
 }
 

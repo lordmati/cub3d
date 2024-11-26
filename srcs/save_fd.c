@@ -9,7 +9,7 @@ void save_map(t_cub *game,char *file,int i, int j)
 	aux = NULL;
 	fd = open(file,O_RDONLY);
 	line = ft_strdup("");
-	game->map = malloc(sizeof( char*) * (game->count_map));
+	game->map = (char **)malloc(sizeof(char *) * (game->count_map));
 	if (!game->map)
 		error_msg("Error allocated malloc\n",game);
 	while(line)
@@ -27,6 +27,7 @@ void save_map(t_cub *game,char *file,int i, int j)
 				i++;
 		}
 	}
+	game->map[j] = NULL;
 	close(fd);
 }
 
