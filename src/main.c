@@ -9,12 +9,18 @@ static void init_cub(t_cub *game)
 	game->floor = NULL;
 	game->ceiling = NULL;
 	game->info = NULL;
+	game->map = NULL;
+	game->arr_ceiling = NULL;
+	game->arr_floor = NULL;
+	game->player_view = '\0';
 	game->player = 0;
 	game->value_rgb_ceiling = 0;
 	game->value_rgb_floor = 0;
 	game->count_data = 0;
 	game->count_map = 0;
 	game->count_line = 0;
+	game->x = 0;
+	game->y = 0;
 }
 
 int main(int argc, char **argv)

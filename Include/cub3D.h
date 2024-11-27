@@ -21,6 +21,9 @@ typedef struct s_cub
 	char	*ceiling;
 	char	**map;
 	char	*info;
+	int		y;
+	int		x;
+	char	player_view;
 }	t_cub;
 
 //Checks
@@ -35,6 +38,7 @@ void check_caracter_map(char **map,t_cub *game);
 //save_fd
 void save_map(t_cub *game,char *file,int i, int j);
 char *read_fd(char *file,t_cub *game);
+void save_player(char c,int y,int x,t_cub *game);
 
 //valid_info
 void valid_info(char *str,t_cub *game);

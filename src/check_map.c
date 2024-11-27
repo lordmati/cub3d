@@ -16,18 +16,14 @@ void check_caracter_map(char **map,t_cub *game)
 			&& map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != '\n'
 			&& map[i][j] != 'E' && map[i][j] != ' ')
 				error_msg("Error character invalid in map\n",game);
-			if(map[i][j] == 'N')
-				game->player++;
-			else if(map[i][j] == 'S')
-				game->player++;
-			else if(map[i][j] == 'E')
-				game->player++;
-			else if(map[i][j] == 'W')
-				game->player++;
+			if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
+				save_player(map[i][j],i,j,game);
 			j++;
 		}
 		i++;
 	}
+	printf("%c\n",game->player_view);
 	if(game->player != 1)
 		error_msg("Invalid number players\n",game);
 }

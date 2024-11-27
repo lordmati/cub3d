@@ -41,8 +41,8 @@ void valid_info(char *str,t_cub *game)
 	{
 		if(str[i] <= '9' && str[i] >= '0')
 			i++;
-		else if(str[i] == ',' && (str[i - 1] <= '9' && str[i - 1] >= '0')
-			&& (str[i + 1] <= '9' && str[i + 1] >= '0'))
+		else if(str[i] == ',' && (str[i - 1] <= '9' && str[i - 1] >= '0'
+			&& (str[i + 1] && str[i + 1] <= '9' && str[i + 1] >= '0')))
 			i++;
 		else
 			error_msg("Character no valid\n",game);

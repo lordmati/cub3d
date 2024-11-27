@@ -1,5 +1,12 @@
 #include "../Include/cub3D.h"
 
+void save_player(char c,int y,int x,t_cub *game)
+{
+	game->player_view = c;
+	game->y = y;
+	game->x = x;
+	game->player++;
+}
 void save_map(t_cub *game,char *file,int i, int j)
 {
 	int fd;
