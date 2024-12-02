@@ -1,5 +1,20 @@
 #include "../Include/cub3D.h"
 
+void check_valid_position_player(char **map,t_cub *game)
+{
+	if (game->y == 0 || game->x == 0)
+		error_msg("Error invalid player position\n",game);
+	if ((map[(int)game->y][(int)game->x - 1] == '\0') || (map[(int)game->y][(int)game->x + 1] == '\0')
+		|| (!map[(int)game->y + 1] || map[(int)game->y + 1][(int)game->x] == '\0') || ( map[(int)game->y - 1][(int)game->x] == '\0'))
+		error_msg("Error null around player position\n",game);
+	if ((map[(int)game->y][(int)game->x - 1] == ' ') || (map[(int)game->y][(int)game->x + 1] == ' ')
+		|| (map[(int)game->y + 1][(int)game->x] == ' ') || (map[(int)game->y - 1][(int)game->x] == ' '))
+		error_msg("Error spaces around player position\n",game);
+	if ((map[(int)game->y][(int)game->x - 1] == '\n') || (map[(int)game->y][(int)game->x + 1] == '\n')
+		|| (map[(int)game->y + 1][(int)game->x] == '\n') || (map[(int)game->y - 1][(int)game->x] == '\n'))
+		error_msg("Error new line around player position\n",game);	
+}
+
 void check_caracter_map(char **map,t_cub *game)
 {
 	int i;
@@ -23,7 +38,6 @@ void check_caracter_map(char **map,t_cub *game)
 		}
 		i++;
 	}
-	printf("%c\n",game->player_view);
 	if(game->player != 1)
 		error_msg("Invalid number players\n",game);
 }

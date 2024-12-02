@@ -2,6 +2,27 @@
 #define CUB3D_H
 
 # include "LIBFT/includes/libft.h"
+# include "MLX42_P2/include/MLX42/MLX42.h"
+
+# define MAP_WIDTH	1080
+# define MAP_HEIGHT	720
+
+# define FOV		60.0
+# define D_ANGLE	1.5
+# define PL_STEP	0.075
+# define M_PI		3.14159265358979323846
+# define M_PI_2		1.57079632679489661923
+
+typedef struct s_ray
+{
+	double ang;
+	double cos;
+	double sin;
+	double x_r;
+	double y_r;
+	double distance;
+	
+}	t_ray;
 
 typedef struct s_cub
 {
@@ -21,9 +42,20 @@ typedef struct s_cub
 	char	*ceiling;
 	char	**map;
 	char	*info;
-	int		y;
-	int		x;
+	double	y;
+	double	x;
 	char	player_view;
+	mlx_t			*init_mlx;
+	mlx_texture_t	*texture_floor;
+	mlx_texture_t	*texture_wall;
+	mlx_texture_t	*texture_exit;
+	mlx_texture_t	*texture_coin;
+	mlx_texture_t	*texture_player;
+	mlx_image_t		*image_floor;
+	mlx_image_t		*image_wall;
+	mlx_image_t		*image_exit;
+	mlx_image_t		*image_coin;
+	mlx_image_t		*image_player;
 }	t_cub;
 
 //Checks
@@ -34,6 +66,7 @@ void check_info(t_cub *game);
 //check map
 void check_map(char **map,t_cub *game);
 void check_caracter_map(char **map,t_cub *game);
+void check_valid_position_player(char **map,t_cub *game);
 
 //save_fd
 void save_map(t_cub *game,char *file,int i, int j);

@@ -40,5 +40,6 @@ int main(int argc, char **argv)
 	game.arr_floor = valid_numbers(game.floor,&game);
 	save_map(&game,argv[1],0,0);
 	check_caracter_map(game.map,&game);
+	check_valid_position_player(game.map,&game);
 	check_map(game.map,&game);
 }
