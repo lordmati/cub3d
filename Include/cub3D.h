@@ -3,9 +3,10 @@
 
 # include "LIBFT/includes/libft.h"
 # include "MLX42_P2/include/MLX42/MLX42.h"
+# include <math.h>
 
-# define MAP_WIDTH	1080
-# define MAP_HEIGHT	720
+# define MAP_WIDTH	1920
+# define MAP_HEIGHT	1080
 
 # define FOV		60.0
 # define D_ANGLE	1.5
@@ -45,7 +46,9 @@ typedef struct s_cub
 	double	y;
 	double	x;
 	char	player_view;
-	mlx_t			*init_mlx;
+	double	radian_view;
+	mlx_t			*mlx;
+	mlx_image_t		*cub_img;
 	mlx_texture_t	*texture_floor;
 	mlx_texture_t	*texture_wall;
 	mlx_texture_t	*texture_exit;
@@ -83,6 +86,11 @@ int	skip_spaces(char *str);
 int count_comma(char *str);
 void free_matrix(char **str);
 int rgb(int r,int g,int b, int a); ///funcion de la mlx (set_rgb)
+
+//set_view
+double set_view(t_cub *game);
+//init mlx
+void init_mlx(t_cub *game);
 
 
 //exit

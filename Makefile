@@ -28,6 +28,8 @@ SRC_FILES = main \
 			save_fd \
 			utils \
 			valid_info \
+			init_mlx \
+			set_view \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))
@@ -39,7 +41,7 @@ all: $(NAME)
 $(NAME): compiling $(OBJ) $(LIBFT) $(MLX42)
 		@echo
 		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42) $(MLX_FLAGS) -o $(NAME)
-		@echo "$(RED)Cub3D compiled!$(RESET)"
+		@echo "$(GREEN)Cub3D compiled!$(RESET)"
 
 $(MLX42):
 		@cmake -B Include/MLX42_P2/build -S ./Include/MLX42_P2
@@ -63,7 +65,7 @@ $(OBJF):
 		@mkdir -p $(OBJ_DIR)
 
 compiling:
-		@echo "$(RED)Compiling Cub3D: $(RESET)"
+		@echo "$(GREEN)Compiling Cub3D: $(RESET)"
 
 clean:
 		@rm -rf $(OBJ_DIR)

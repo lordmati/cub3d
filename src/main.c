@@ -21,6 +21,7 @@ static void init_cub(t_cub *game)
 	game->count_line = 0;
 	game->x = 0;
 	game->y = 0;
+	game->radian_view = 0;
 }
 
 int main(int argc, char **argv)
@@ -42,4 +43,6 @@ int main(int argc, char **argv)
 	check_caracter_map(game.map,&game);
 	check_valid_position_player(game.map,&game);
 	check_map(game.map,&game);
+	game.radian_view = set_view(&game);
+	init_mlx(&game);
 }
