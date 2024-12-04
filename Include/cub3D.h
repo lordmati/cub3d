@@ -22,7 +22,15 @@ typedef struct s_ray
 	double x_r;
 	double y_r;
 	double distance;
-	
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	int side;
+	int stepX;
+	int stepY;
+	int mapX;
+	int mapY;
 }	t_ray;
 
 typedef struct s_cub

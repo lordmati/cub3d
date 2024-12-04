@@ -5,7 +5,7 @@ USER 	= misaguir
 CFLAGS 	= -Wall -Wextra -Werror -g
 LIBFT 	= ./Include/LIBFT/libft.a
 MLX42 	= ./Include/MLX42_P2/build/libmlx42.a
-MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm
+MLX_FLAGS = -Iinclude -ldl -lglfw3 -pthread -lm
 SRC_DIR = src/
 OBJ_DIR = obj/
 LIB = ./Include/$(NAME).h
@@ -40,7 +40,7 @@ all: $(NAME)
 
 $(NAME): compiling $(OBJ) $(LIBFT) $(MLX42)
 		@echo
-		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42) $(MLX_FLAGS) -o $(NAME)
+		@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42) $(MLX_FLAGS)  -o $(NAME)
 		@echo "$(GREEN)Cub3D compiled!$(RESET)"
 
 $(MLX42):
@@ -80,7 +80,5 @@ fclean:
 		@make fclean -s -C ./Include/LIBFT/
 		@make clean -s -C ./Include/MLX42_P2/build/
 		@echo "$(RED)Cleaning Cub3D's executables.$(RESET)"
-
-re: fclean all
 
 .PHONY: all clean fclean re compiling
