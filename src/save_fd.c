@@ -3,8 +3,8 @@
 void save_player(char c,int y,int x,t_cub *game)
 {
 	game->player_view = c;
-	game->y = y;
-	game->x = x;
+	game->y = y + 0.5;
+	game->x = x + 0.5;
 	game->player++;
 }
 void save_map(t_cub *game,char *file,int i, int j)

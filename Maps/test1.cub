@@ -1,0 +1,16 @@
+NO Textures/wall.png
+SO Textures/wall2.png
+WE Textures/wallg1.png
+EA Textures/wallg2.png
+
+F 124,124,124
+C 255,255,255
+
+111111111
+101000001
+101101001
+100000001
+10N000001
+100100001
+111111111
+

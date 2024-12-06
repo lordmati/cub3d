@@ -50,8 +50,8 @@ static void ray_steps(t_ray *ray, t_cub *game)
 
 static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 {
-	int start;
-	int end;
+	double start;
+	double end;
 	ray->mapX = (int)game->x;
 	ray->mapY = (int)game->y;
 	ray->deltaDistX = fabs(1 / ray->cos);
@@ -65,16 +65,20 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 	ray->distance = ray->distance * cos(ray->ang - game->radian_view);
 	ray->x_r = game->x + ray->distance * ray->cos;
     ray->y_r = game->y + ray->distance * ray->sin;
-	start =MAP_HEIGHT/2 - (MAP_HEIGHT/(2 * ray->distance));
-	end =MAP_HEIGHT/2 + (MAP_HEIGHT/(2 * ray->distance));
-	while(start<=end)
+	start = MAP_HEIGHT/2 - (MAP_HEIGHT/(2 * ray->distance));
+	end = MAP_HEIGHT/2 + (MAP_HEIGHT/(2 * ray->distance));
+	if (start < 0)
+		start = 0;
+	if(end >= MAP_HEIGHT)
+		end = MAP_HEIGHT - 1;
+	while(start <= end)
 	{
-		mlx_put_pixel(game->cub_img,i,start,rgb(39,168,54,255));
+		mlx_put_pixel(game->cub_img,i,start,rgb(0,0,0,255));
 		start++;
 	}
 }
 
-static void ray_casting(t_ray *ray,t_cub *game)
+void ray_casting(t_ray *ray,t_cub *game)
 {
 	int i = 0;
 	double ang;
@@ -83,17 +87,17 @@ static void ray_casting(t_ray *ray,t_cub *game)
 
 	radian_fov = (FOV * M_PI) / 180;
 	ang = (FOV / MAP_WIDTH) * M_PI / 180;
-	start = game->radian_view + radian_fov / 2;
+	start = game->radian_view - radian_fov / 2;
 	while(i < MAP_WIDTH)
 	{
-		ray[i].ang = start - (ang * i);
+		ray[i].ang = start + (ang * i);
 		ray[i].sin = sin(ray[i].ang);
 		ray[i].cos = cos(ray[i].ang);
 		dda_algorithm(&ray[i], game, i);
 		i++;
 	}
 }
-static void paint_all(t_cub *game,int x, int y)
+void paint_all(t_cub *game,int x, int y)
 {
 	int rgb_ceiling;
 	int rgb_floor;
@@ -119,11 +123,14 @@ static void paint_all(t_cub *game,int x, int y)
 void init_mlx(t_cub *game)
 {
 	t_ray ray[MAP_WIDTH];
+	game->ray = ray;
 	game->mlx = mlx_init(MAP_WIDTH,
 			MAP_HEIGHT, "cub3D", false);
 	game->cub_img = mlx_new_image(game->mlx, MAP_WIDTH, MAP_HEIGHT);
 	paint_all(game,0,0);
 	mlx_image_to_window(game->mlx, game->cub_img, 0, 0);
-	ray_casting(ray,game);
+	ray_casting(game->ray,game);
+	mlx_key_hook(game->mlx, &key_press, game);
+	mlx_loop_hook(game->mlx,&mouse_move,game);
 	mlx_loop(game->mlx);
 }

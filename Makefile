@@ -30,6 +30,7 @@ SRC_FILES = main \
 			valid_info \
 			init_mlx \
 			set_view \
+			moves_player \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))
