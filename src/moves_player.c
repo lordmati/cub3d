@@ -2,18 +2,29 @@
 
 static void	move_is_correct(t_cub *game,mlx_key_data_t key)
 {
-	if(key.key == MLX_KEY_A)
-	{
-
-		game->radian_view -= ANGLE_MOVE;
-		paint_all(game,0,0);
-		ray_casting(game->ray,game);
-	}
 	if(key.key == MLX_KEY_D)
 	{
-		game->radian_view += ANGLE_MOVE;
-		paint_all(game,0,0);
-		ray_casting(game->ray,game);
+		if(game->map[(int)(game->y - P_MOVE * cos(game->radian_view))][(int)(game->x - P_MOVE * sin(game->radian_view))] != '1'
+			&& game->map[(int)(game->y - P_MOVE * cos(game->radian_view))][(int)game->x] != '1'
+			&& game->map[(int)game->y][(int)(game->x - P_MOVE * sin(game->radian_view))] != '1')
+		{
+			game->y -= P_MOVE * cos(game->radian_view);
+			game->x -= P_MOVE * sin(game->radian_view);
+			paint_all(game,0,0);
+			ray_casting(game->ray,game);
+		}
+	}
+	if(key.key == MLX_KEY_A)
+	{
+		if(game->map[(int)(game->y + P_MOVE * cos(game->radian_view))][(int)(game->x + P_MOVE * sin(game->radian_view))] != '1'
+			&& game->map[(int)(game->y + P_MOVE * cos(game->radian_view))][(int)game->x] != '1'
+			&& game->map[(int)game->y][(int)(game->x - P_MOVE * sin(game->radian_view))] != '1')
+		{
+			game->y += P_MOVE * cos(game->radian_view);
+			game->x += P_MOVE * sin(game->radian_view);
+			paint_all(game,0,0);
+			ray_casting(game->ray,game);
+		}
 	}
 	if(key.key == MLX_KEY_S)
 	{
@@ -39,21 +50,19 @@ static void	move_is_correct(t_cub *game,mlx_key_data_t key)
 			ray_casting(game->ray,game);
 		}
 	}
-}
-
-void	key_press(mlx_key_data_t key, void *data)
-{
-	t_cub	*aux;
-
-	aux = (t_cub *)data;
-	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
+	if(key.key == MLX_KEY_LEFT)
 	{
-		mlx_close_window(aux->mlx);
+
+		game->radian_view -= ANGLE_MOVE;
+		paint_all(game,0,0);
+		ray_casting(game->ray,game);
 	}
-	if ((key.key == MLX_KEY_W || key.key == MLX_KEY_S
-		|| key.key == MLX_KEY_A || key.key == MLX_KEY_D)
-		&& (key.action == MLX_REPEAT || key.action == MLX_PRESS))
-		move_is_correct(aux,key);
+	if(key.key == MLX_KEY_RIGHT)
+	{
+		game->radian_view += ANGLE_MOVE;
+		paint_all(game,0,0);
+		ray_casting(game->ray,game);
+	}
 }
 void	mouse_move(void *data)
 {
@@ -78,4 +87,20 @@ void	mouse_move(void *data)
 			ray_casting(aux->ray,aux);
 		}
 	}
+}
+
+void	key_press(mlx_key_data_t key, void *data)
+{
+	t_cub	*aux;
+
+	aux = (t_cub *)data;
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
+	{
+		mlx_close_window(aux->mlx);
+	}
+	if ((key.key == MLX_KEY_W || key.key == MLX_KEY_S
+		|| key.key == MLX_KEY_A || key.key == MLX_KEY_D
+		|| key.key == MLX_KEY_LEFT || key.key == MLX_KEY_RIGHT)
+		&& (key.action == MLX_REPEAT || key.action == MLX_PRESS))
+		move_is_correct(aux,key);
 }
