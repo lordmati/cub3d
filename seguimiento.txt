@@ -1,0 +1,1 @@
+utilizar funcion mlx_texture_t	*texture

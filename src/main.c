@@ -31,6 +31,9 @@ int main(int argc, char **argv)
 	init_cub(&game);
 	if(argc != 2)
 		error_msg("Error: Arguments Incorrect\n",NULL);
+	if ((MAP_HEIGHT < 500 || MAP_HEIGHT > 1800)
+		&& (MAP_WIDTH < 500 || MAP_WIDTH > 3000))
+		error_msg("Error: size window\n",NULL);
 	check_extension(argv[1]);
 	game.info = read_fd(argv[1],&game);
 	free(game.info);

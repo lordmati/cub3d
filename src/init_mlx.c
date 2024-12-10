@@ -52,6 +52,9 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 {
 	double start;
 	double end;
+	int rgba;
+
+	rgba = rgb(0,0,0,255);
 	ray->mapX = (int)game->x;
 	ray->mapY = (int)game->y;
 	ray->deltaDistX = fabs(1 / ray->cos);
@@ -71,9 +74,23 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 		start = 0;
 	if(end >= MAP_HEIGHT)
 		end = MAP_HEIGHT - 1;
+	if(ray->side == 0)
+	{
+		if(ray->cos > 0)//este
+			rgba = rgb(181,36,175,255); // este violeta
+		else
+			rgba = rgb(22,175,41,255); //verde
+	}
+	if (ray->side == 1)
+	{
+		if(ray->sin < 0)
+			rgba = rgb(224,133,37,255); // sur rojo
+		else
+			rgba = rgb(233,10,10,255); // norte naranja
+	}
 	while(start <= end)
 	{
-		mlx_put_pixel(game->cub_img,i,start,rgb(0,0,0,255));
+		mlx_put_pixel(game->cub_img,i,start,rgba);
 		start++;
 	}
 }
