@@ -27,11 +27,14 @@ typedef struct s_ray
 	double sideDistY;
 	double deltaDistX;
 	double deltaDistY;
+	double wallX;
 	int side;
 	int stepX;
 	int stepY;
 	int mapX;
 	int mapY;
+	int texX;
+	int texY;
 }	t_ray;
 
 typedef struct s_cub
@@ -60,10 +63,14 @@ typedef struct s_cub
 	mlx_t			*mlx;
 	mlx_image_t		*cub_img;
 	mlx_texture_t	*texture_floor;
-	mlx_texture_t	*texture_wall;
+	mlx_texture_t	*texture_wall_n;
+	mlx_texture_t	*texture_wall_s;
+	mlx_texture_t	*texture_wall_e;
+	mlx_texture_t	*texture_wall_w;
 	mlx_texture_t	*texture_exit;
 	mlx_texture_t	*texture_coin;
 	mlx_texture_t	*texture_player;
+	mlx_texture_t	*current_texture;
 	mlx_image_t		*image_floor;
 	mlx_image_t		*image_wall;
 	mlx_image_t		*image_exit;
@@ -103,6 +110,10 @@ double set_view(t_cub *game);
 void init_mlx(t_cub *game);
 void paint_all(t_cub *game,int x, int y);
 void ray_casting(t_ray *ray,t_cub *game);
+
+//paint_texture
+void load_textures(t_cub *game);
+void paint_texture(t_ray *ray, t_cub*game);
 
 //moves player
 void	key_press(mlx_key_data_t key, void *data);

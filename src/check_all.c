@@ -36,22 +36,22 @@ void ft_check_line(char *line,t_cub *game)
 	if(!game->north && ft_strncmp(line,"NO ",3) == 0)
 	{
 		game->count_data++;
-		game->north = ft_strdup(line);
+		game->north = ft_strdup(line + 3);
 	}
 	if(!game->south && ft_strncmp(line,"SO ",3) == 0)
 	{
 		game->count_data++;
-		game->south = ft_strdup(line);
+		game->south = ft_strdup(line + 3);
 	}
 	if(!game->west && ft_strncmp(line,"WE ",3) == 0)
 	{
 		game->count_data++;
-		game->west = ft_strdup(line);
+		game->west = ft_strdup(line + 3);
 	}
 	if(!game->east && ft_strncmp(line,"EA ",3) == 0)
 	{
 		game->count_data++;
-		game->east = ft_strdup(line);
+		game->east = ft_strdup(line + 3);
 	}
 	if (!game->floor && ft_strncmp(line,"F ",2) == 0)
 	{

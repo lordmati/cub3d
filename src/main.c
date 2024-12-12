@@ -31,9 +31,6 @@ int main(int argc, char **argv)
 	init_cub(&game);
 	if(argc != 2)
 		error_msg("Error: Arguments Incorrect\n",NULL);
-	if ((MAP_HEIGHT < 500 || MAP_HEIGHT > 1800)
-		&& (MAP_WIDTH < 500 || MAP_WIDTH > 3000))
-		error_msg("Error: size window\n",NULL);
 	check_extension(argv[1]);
 	game.info = read_fd(argv[1],&game);
 	free(game.info);
@@ -47,5 +44,9 @@ int main(int argc, char **argv)
 	check_valid_position_player(game.map,&game);
 	check_map(game.map,&game);
 	game.radian_view = set_view(&game);
+	game.north = ft_substr(game.north,0,ft_strlen(game.north) - 1);
+	game.south = ft_substr(game.south,0,ft_strlen(game.south) - 1);
+	game.east = ft_substr(game.east,0,ft_strlen(game.east) - 1);
+	game.west = ft_substr(game.west,0,ft_strlen(game.west) - 1);
 	init_mlx(&game);
 }

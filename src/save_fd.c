@@ -11,9 +11,7 @@ void save_map(t_cub *game,char *file,int i, int j)
 {
 	int fd;
 	char *line;
-	char *aux;
 
-	aux = NULL;
 	fd = open(file,O_RDONLY);
 	line = ft_strdup("");
 	game->map = (char **)malloc(sizeof(char *) * (game->count_map));

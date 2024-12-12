@@ -72,7 +72,7 @@ void	mouse_move(void *data)
 
 	aux = (t_cub *)data;
 	mlx_get_mouse_pos(aux->mlx,&x,&y);
-	if (y < MAP_HEIGHT && y > 0 && x > 0 && x < MAP_WIDTH)
+	if (y < MAP_HEIGHT && y > 0)
 	{
 		if(x < (MAP_WIDTH / 2) && x < (MAP_WIDTH / 2) - (MAP_WIDTH / 4))
 		{
