@@ -52,6 +52,7 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 {
 	int start, start2;
 	int end, end2;
+	double distance_corrected;
 	ray->mapX = (int)game->x;
 	ray->mapY = (int)game->y;
 	ray->deltaDistX = fabs(1 / ray->cos);
@@ -62,47 +63,32 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 		ray->distance = (ray->mapX - game->x + (1 - ray->stepX)  / 2) / ray->cos;
 	else
 		 ray->distance = (ray->mapY - game->y + (1 - ray->stepY) / 2) / ray->sin;
-	ray->distance = ray->distance * cos(ray->ang - game->radian_view);
-	ray->x_r = game->x + ray->distance * ray->cos;
-    ray->y_r = game->y + ray->distance * ray->sin;
-	start = MAP_HEIGHT/2 - (MAP_HEIGHT/(2 * ray->distance));
-	end = MAP_HEIGHT/2 + (MAP_HEIGHT/(2 * ray->distance));
+	distance_corrected = ray->distance * cos (ray->ang - game->radian_view);
+	start = MAP_HEIGHT/2 - (MAP_WIDTH/(2 * distance_corrected));
+	end = MAP_HEIGHT/2 + (MAP_WIDTH/(2 * distance_corrected));
 	if (start < 0)
 		start2 = 0;
 	else
 		start2 = start;
 	if(end >= MAP_HEIGHT)
-		end2 = MAP_HEIGHT - 1;
+		end2 = MAP_HEIGHT;
 	else
 		end2 = end;
 	paint_texture(ray, game);
-	for (int y = (int)start2; y <= (int)end2; y++)
+	for (int y = (int)start2; y < (int)end2; y++)
 	{
 		ray->texY = (int)((y - start) * (game->current_texture->height) / (end - start));
-		// printf("game current texture pixels pointer:	%p\n",game->current_texture->pixels);
-		// if (!game->current_texture || !game->current_texture->pixels)
-		// {
-		// 	fprintf(stderr, "Error: La textura no se cargó o el puntero pixels es NULL.\n");
-		// 	return;
-		// }
-		// printf("start: %f, end: %f, y: %d\n", start, end, y);
-		// printf("texY: %d, height: %d\n", ray->texY, game->current_texture->height);
 		if (ray->texY < 0)
 			ray->texY = 0;
 		if (ray->texY >= (int)game->current_texture->height)
-		{
-			//printf("start:	%d\n", start);
-			//printf("resta:	%d\n", y-start);
 			ray->texY = (int)game->current_texture->height - 1;
-			// fprintf(stderr, "Error: texY fuera de los límites. texY=%d, height=%d\n", ray->texY, game->current_texture->height);
-			// return;
-		}
 		uint32_t color = *(uint32_t *)(game->current_texture->pixels + 
                     (ray->texY * game->current_texture->width + ray->texX) * 4);
 		color = (color & 0xff000000) >> 24 | (color & 0x00ff0000) >> 8 | (color & 0x0000ff00) << 8 | (color & 0x000000ff) << 24;
-    	mlx_put_pixel(game->cub_img, i, y, color);
+		mlx_put_pixel(game->cub_img, i, y, color);
 	}
 }
+
 
 void ray_casting(t_ray *ray,t_cub *game)
 {
@@ -153,11 +139,13 @@ void init_mlx(t_cub *game)
 	game->mlx = mlx_init(MAP_WIDTH,
 			MAP_HEIGHT, "cub3D", false);
 	game->cub_img = mlx_new_image(game->mlx, MAP_WIDTH, MAP_HEIGHT);
+	init_torch(game);
 	load_textures(game);
 	paint_all(game,0,0);
 	mlx_image_to_window(game->mlx, game->cub_img, 0, 0);
 	ray_casting(game->ray,game);
 	mlx_key_hook(game->mlx, &key_press, game);
 	mlx_loop_hook(game->mlx,&mouse_move,game);
+	mlx_loop_hook(game->mlx,&loop_animation,game);
 	mlx_loop(game->mlx);
 }

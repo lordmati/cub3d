@@ -1,7 +1,7 @@
-NO Textures/Pableada.png
-SO Textures/Pableada.png
-WE Textures/Pableada.png
-EA Textures/Pableada.png
+NO Textures/wall.png
+SO Textures/wall.png
+WE Textures/wall.png
+EA Textures/wall.png
 
 F 124,124,124
 C 255,255,255
@@ -10,8 +10,8 @@ C 255,255,255
 100000001
 100000001
 100000001
-100000001
-100000011
+101000001
+100100011
 10N000001
 100000001
 100000001

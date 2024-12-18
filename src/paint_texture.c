@@ -18,24 +18,29 @@ void load_textures(t_cub *game)
 
 void paint_texture(t_ray *ray, t_cub *game)
 {
-	if (ray->side == 0)
-	{
-		ray->wallX = game->y + ray->distance * ray->sin;
-		if(ray->stepX == -1)
-			game->current_texture = game->texture_wall_n;
-		else
-			game->current_texture = game->texture_wall_s;
-	}
-	else
-	{
-		ray->wallX = game->x + ray->distance * ray->cos;
-		if (ray->stepY == -1)
-			game->current_texture = game->texture_wall_w;
-		else
-			game->current_texture = game->texture_wall_e;
-	}
-	ray->wallX -= floor(ray->wallX);
-	if (ray->wallX < 1 && ray->wallX > 0)
-		ray->wallX = fmod(ray->wallX, 1.0);
-	ray->texX = (int)(ray->wallX * game->current_texture->width);
+    if (ray->side == 0)
+    {
+        ray->wallX = game->y + ray->distance * ray->sin;
+        if (ray->stepX == -1)
+            game->current_texture = game->texture_wall_n;
+        else
+            game->current_texture = game->texture_wall_s;
+    }
+    else
+    {
+        ray->wallX = game->x + ray->distance * ray->cos;
+        if (ray->stepY == -1)
+            game->current_texture = game->texture_wall_w;
+        else
+            game->current_texture = game->texture_wall_e;
+    }
+
+    ray->wallX -= floor(ray->wallX);
+    if (ray->wallX < 0)
+        ray->wallX += 1.0;
+    ray->texX = (int)(ray->wallX * game->current_texture->width);
+    if (ray->texX >= (int)game->current_texture->width)
+        ray->texX = (int)game->current_texture->width - 1;
+    if (ray->texX < 0)
+        ray->texX = 0;
 }

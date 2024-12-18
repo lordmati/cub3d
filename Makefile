@@ -31,7 +31,8 @@ SRC_FILES = main \
 			init_mlx \
 			set_view \
 			moves_player \
-			paint_texture
+			paint_texture \
+			torch_animation \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))
