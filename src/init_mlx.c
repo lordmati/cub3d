@@ -50,9 +50,8 @@ static void ray_steps(t_ray *ray, t_cub *game)
 
 static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 {
-	int start, start2;
-	int end, end2;
 	double distance_corrected;
+
 	ray->mapX = (int)game->x;
 	ray->mapY = (int)game->y;
 	ray->deltaDistX = fabs(1 / ray->cos);
@@ -64,29 +63,7 @@ static void dda_algorithm(t_ray *ray, t_cub *game, int i)
 	else
 		 ray->distance = (ray->mapY - game->y + (1 - ray->stepY) / 2) / ray->sin;
 	distance_corrected = ray->distance * cos (ray->ang - game->radian_view);
-	start = MAP_HEIGHT/2 - (MAP_WIDTH/(2 * distance_corrected));
-	end = MAP_HEIGHT/2 + (MAP_WIDTH/(2 * distance_corrected));
-	if (start < 0)
-		start2 = 0;
-	else
-		start2 = start;
-	if(end >= MAP_HEIGHT)
-		end2 = MAP_HEIGHT;
-	else
-		end2 = end;
-	paint_texture(ray, game);
-	for (int y = (int)start2; y < (int)end2; y++)
-	{
-		ray->texY = (int)((y - start) * (game->current_texture->height) / (end - start));
-		if (ray->texY < 0)
-			ray->texY = 0;
-		if (ray->texY >= (int)game->current_texture->height)
-			ray->texY = (int)game->current_texture->height - 1;
-		uint32_t color = *(uint32_t *)(game->current_texture->pixels + 
-                    (ray->texY * game->current_texture->width + ray->texX) * 4);
-		color = (color & 0xff000000) >> 24 | (color & 0x00ff0000) >> 8 | (color & 0x0000ff00) << 8 | (color & 0x000000ff) << 24;
-		mlx_put_pixel(game->cub_img, i, y, color);
-	}
+	paint_wall(game,ray,i,distance_corrected);
 }
 
 
@@ -109,13 +86,15 @@ void ray_casting(t_ray *ray,t_cub *game)
 		i++;
 	}
 }
-void paint_all(t_cub *game,int x, int y)
+void	paint_all(t_cub *game, int x, int y)
 {
-	int rgb_ceiling;
-	int rgb_floor;
+	int	rgb_ceiling;
+	int	rgb_floor;
 
-	rgb_ceiling = rgb(game->arr_ceiling[0],game->arr_ceiling[1],game->arr_ceiling[2],255);
-	rgb_floor = rgb(game->arr_floor[0],game->arr_floor[1],game->arr_floor[2],255);
+	rgb_ceiling = rgb(game->arr_ceiling[0], game->arr_ceiling[1],
+			game->arr_ceiling[2], 255);
+	rgb_floor = rgb(game->arr_floor[0], game->arr_floor[1],
+			game->arr_floor[2], 255);
 	while(MAP_HEIGHT / 2 > y)
 	{
 		x = 0;

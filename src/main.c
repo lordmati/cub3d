@@ -8,7 +8,6 @@ static void init_cub(t_cub *game)
 	game->west = NULL;
 	game->floor = NULL;
 	game->ceiling = NULL;
-	game->info = NULL;
 	game->map = NULL;
 	game->arr_ceiling = NULL;
 	game->arr_floor = NULL;
@@ -32,8 +31,7 @@ int main(int argc, char **argv)
 	if(argc != 2)
 		error_msg("Error: Arguments Incorrect\n",NULL);
 	check_extension(argv[1]);
-	game.info = read_fd(argv[1],&game);
-	free(game.info);
+	read_fd(argv[1],&game);
 	check_info(&game);
 	valid_info(game.ceiling,&game);
 	valid_info(game.floor,&game);
@@ -43,10 +41,8 @@ int main(int argc, char **argv)
 	check_caracter_map(game.map,&game);
 	check_valid_position_player(game.map,&game);
 	check_map(game.map,&game);
+	set_paths(&game);
 	game.radian_view = set_view(&game);
-	game.north = ft_substr(game.north,0,ft_strlen(game.north) - 1);
-	game.south = ft_substr(game.south,0,ft_strlen(game.south) - 1);
-	game.east = ft_substr(game.east,0,ft_strlen(game.east) - 1);
-	game.west = ft_substr(game.west,0,ft_strlen(game.west) - 1);
 	init_mlx(&game);
+	free_struc(&game);
 }

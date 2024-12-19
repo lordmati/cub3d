@@ -1,5 +1,44 @@
 #include "../Include/cub3D.h"
 
+static void paint_texture(t_cub *game,t_ray *ray,int i)
+{
+    int y;
+    uint32_t color;
+    y = ray->start_two;
+
+    while(y < ray->end_two)
+	{
+		ray->texY = (int)((y - ray->start) * (game->current_texture->height) /
+                (ray->end - ray->start));
+		if (ray->texY < 0)
+			ray->texY = 0;
+		if (ray->texY >= (int)game->current_texture->height)
+			ray->texY = (int)game->current_texture->height - 1;
+		color = *(uint32_t *)(game->current_texture->pixels + 
+                    (ray->texY * game->current_texture->width + ray->texX) * 4);
+		color = (color & 0xff000000) >> 24 | (color & 0x00ff0000) >> 8 |
+                (color & 0x0000ff00) << 8 | (color & 0x000000ff) << 24;
+		mlx_put_pixel(game->cub_img, i, y, color);
+        y++;
+	}
+}
+
+void paint_wall(t_cub *game,t_ray *ray, int i,double distance_corrected)
+{
+    ray->start = MAP_HEIGHT/2 - (MAP_WIDTH/(2 * distance_corrected));
+	ray->end = MAP_HEIGHT/2 + (MAP_WIDTH/(2 * distance_corrected));
+	if (ray->start < 0)
+		ray->start_two = 0;
+	else
+		ray->start_two = ray->start;
+	if(ray->end >= MAP_HEIGHT)
+		ray->end_two = MAP_HEIGHT;
+	else
+		ray->end_two = ray->end;
+	set_texture(ray, game);
+    paint_texture(game,ray,i);
+}
+
 void load_textures(t_cub *game)
 {
 	game->texture_wall_n = mlx_load_png(game->north);
@@ -16,7 +55,7 @@ void load_textures(t_cub *game)
     	error_msg("Failed to load west texture", game);
 }
 
-void paint_texture(t_ray *ray, t_cub *game)
+void set_texture(t_ray *ray, t_cub *game)
 {
     if (ray->side == 0)
     {

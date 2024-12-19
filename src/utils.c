@@ -1,21 +1,8 @@
 #include "../Include/cub3D.h"
 
-char *ft_joinfree(char *s1, char *s2)
-{
-	char *temp;
-	if(!s1 && s2)
-		return(ft_strdup(s2));
-	temp = ft_strjoin(s1,s2);
-	if (s1)
-		free(s1);
-	return(temp);
-}
 
-int	skip_spaces(char *str)
+int	skip_spaces(char *str, int i)
 {
-	int i;
-
-	i = 1;
 	while(str[i] && str[i] == ' ')
 		i++;
 	return(i);

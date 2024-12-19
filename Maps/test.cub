@@ -1,7 +1,7 @@
-NO                    Textures/quarzo1.png
+NO      Textures/quarzo1.png
 SO Textures/quarzo2.png
-WE Textures/quarzo3.png
-EA Textures/quarzo4.png
+WE   Textures/quarzo3.png
+EA            Textures/quarzo4.png
 
 F 124,124,124
 C 112,112,235

@@ -36,7 +36,7 @@ void valid_info(char *str,t_cub *game)
 
 	if(count_comma(str) != 2)
 		error_msg("No valid data ceiling or floor\n",game);
-	i = skip_spaces(str);
+	i = skip_spaces(str, 1);
 	while(str[i] && str[i] != '\n')
 	{
 		if(str[i] <= '9' && str[i] >= '0')

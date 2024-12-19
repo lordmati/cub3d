@@ -36,13 +36,11 @@ void save_map(t_cub *game,char *file,int i, int j)
 	close(fd);
 }
 
-char *read_fd(char *file,t_cub *game)
+void read_fd(char *file,t_cub *game)
 {
 	int fd;
 	char *line;
-	char *aux;
 
-	aux = NULL;
 	fd = open(file,O_RDONLY);
 	if (fd < 0)
 		error_msg("Error: Open File\n",NULL);
@@ -52,15 +50,11 @@ char *read_fd(char *file,t_cub *game)
 		free(line);
 		line = get_next_line(fd);
 		if (line)
-		{
 			ft_check_line(line,game);
-			aux = ft_joinfree(aux,line);
-		}
 		if (game->count_data == 6)
 			game->count_map++;
 		else
 			game->count_line++;
 	}
 	close(fd);
-	return(aux);
 }

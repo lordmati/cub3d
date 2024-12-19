@@ -1,6 +1,6 @@
 #include "../Include/cub3D.h"
 
-static void free_struc(t_cub *game)
+void free_struc(t_cub *game)
 {
 	if(game->north)
 		free(game->north);

@@ -44,6 +44,10 @@ typedef struct s_ray
 	int mapY;
 	int texX;
 	int texY;
+	int	start;
+	int start_two;
+	int	end;
+	int end_two;
 }	t_ray;
 
 typedef struct s_cub
@@ -63,7 +67,6 @@ typedef struct s_cub
 	char	*floor;
 	char	*ceiling;
 	char	**map;
-	char	*info;
 	double	y;
 	double	x;
 	char	player_view;
@@ -77,15 +80,7 @@ typedef struct s_cub
 	mlx_texture_t	*texture_wall_s;
 	mlx_texture_t	*texture_wall_e;
 	mlx_texture_t	*texture_wall_w;
-	mlx_texture_t	*texture_exit;
-	mlx_texture_t	*texture_coin;
-	mlx_texture_t	*texture_player;
 	mlx_texture_t	*current_texture;
-	mlx_image_t		*image_floor;
-	mlx_image_t		*image_wall;
-	mlx_image_t		*image_exit;
-	mlx_image_t		*image_coin;
-	mlx_image_t		*image_player;
 }	t_cub;
 
 //Checks
@@ -100,16 +95,19 @@ void check_valid_position_player(char **map,t_cub *game);
 
 //save_fd
 void save_map(t_cub *game,char *file,int i, int j);
-char *read_fd(char *file,t_cub *game);
+void read_fd(char *file,t_cub *game);
 void save_player(char c,int y,int x,t_cub *game);
 
 //valid_info
 void valid_info(char *str,t_cub *game);
 int *valid_numbers(char *str,t_cub *game);
 
+//set info
+void	set_paths(t_cub *game);
+
 //utils
 char *ft_joinfree(char *s1, char *s2);
-int	skip_spaces(char *str);
+int	skip_spaces(char *str,int i);
 int count_comma(char *str);
 void free_matrix(char **str);
 int rgb(int r,int g,int b, int a);
@@ -124,7 +122,8 @@ void ray_casting(t_ray *ray,t_cub *game);
 
 //paint_texture
 void load_textures(t_cub *game);
-void paint_texture(t_ray *ray, t_cub*game);
+void set_texture(t_ray *ray, t_cub*game);
+void paint_wall(t_cub *game,t_ray *ray, int i,double distance_corrected);
 
 //moves player
 void	key_press(mlx_key_data_t key, void *data);
@@ -145,6 +144,7 @@ void	key_w(t_cub *game);
 //exit
 
 void error_msg(char *str,t_cub *game);
+void free_struc(t_cub *game);
 
 
 #endif

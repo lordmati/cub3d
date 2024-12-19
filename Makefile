@@ -34,6 +34,7 @@ SRC_FILES = main \
 			paint_texture \
 			torch_animation \
 			set_moves \
+			set_info \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))
