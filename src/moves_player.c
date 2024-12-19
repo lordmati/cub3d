@@ -3,53 +3,13 @@
 static void	move_is_correct(t_cub *game,mlx_key_data_t key)
 {
 	if(key.key == MLX_KEY_D)
-	{
-		if(game->map[(int)(game->y + P_MOVE * cos(game->radian_view))][(int)(game->x - P_MOVE * sin(game->radian_view))] != '1'
-			&& game->map[(int)(game->y + P_MOVE * cos(game->radian_view))][(int)game->x] != '1'
-			&& game->map[(int)game->y][(int)(game->x - P_MOVE * sin(game->radian_view))] != '1')
-		{
-			game->y += P_MOVE * cos(game->radian_view);
-			game->x -= P_MOVE * sin(game->radian_view);
-			paint_all(game,0,0);
-			ray_casting(game->ray,game);
-		}
-	}
+		key_d(game);
 	if(key.key == MLX_KEY_A)
-	{
-		if(game->map[(int)(game->y - P_MOVE * cos(game->radian_view))][(int)(game->x + P_MOVE * sin(game->radian_view))] != '1'
-			&& game->map[(int)(game->y - P_MOVE * cos(game->radian_view))][(int)game->x] != '1'
-			&& game->map[(int)game->y][(int)(game->x + P_MOVE * sin(game->radian_view))] != '1')
-		{
-			game->y -= P_MOVE * cos(game->radian_view);
-			game->x += P_MOVE * sin(game->radian_view);
-			paint_all(game,0,0);
-			ray_casting(game->ray,game);
-		}
-	}
+		key_a(game);
 	if(key.key == MLX_KEY_S)
-	{
-		if(game->map[(int)(game->y - P_MOVE * sin(game->radian_view))][(int)(game->x - P_MOVE * cos(game->radian_view))] != '1'
-			&& game->map[(int)(game->y - P_MOVE * sin(game->radian_view))][(int)game->x] != '1'
-			&& game->map[(int)game->y][(int)(game->x - P_MOVE * cos(game->radian_view))] != '1')
-		{
-			game->y -= P_MOVE * sin(game->radian_view);
-			game->x -= P_MOVE * cos(game->radian_view);
-			paint_all(game,0,0);
-			ray_casting(game->ray,game);
-		}
-	}
+		key_s(game);
 	if(key.key == MLX_KEY_W)
-	{
-		if(game->map[(int)(game->y + P_MOVE * sin(game->radian_view))][(int)(game->x + P_MOVE * cos(game->radian_view))] != '1'
-			&& game->map[(int)(game->y + P_MOVE * sin(game->radian_view))][(int)game->x] != '1'
-			&& game->map[(int)game->y][(int)(game->x + P_MOVE * cos(game->radian_view))] != '1')
-		{
-			game->y += P_MOVE * sin(game->radian_view);
-			game->x += P_MOVE * cos(game->radian_view);
-			paint_all(game,0,0);
-			ray_casting(game->ray,game);
-		}
-	}
+		key_w(game);
 	if(key.key == MLX_KEY_LEFT)
 	{
 

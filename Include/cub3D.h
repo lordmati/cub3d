@@ -135,6 +135,13 @@ void	loop_animation(void *param);
 void	init_torch(t_cub *game);
 
 
+//set moves
+
+void	key_a(t_cub *game);
+void	key_s(t_cub *game);
+void	key_d(t_cub *game);
+void	key_w(t_cub *game);
+
 //exit
 
 void error_msg(char *str,t_cub *game);

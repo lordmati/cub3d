@@ -33,6 +33,7 @@ SRC_FILES = main \
 			moves_player \
 			paint_texture \
 			torch_animation \
+			set_moves \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))
