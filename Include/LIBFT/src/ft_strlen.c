@@ -6,7 +6,7 @@
 /*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:15:43 by pgonzal2          #+#    #+#             */
-/*   Updated: 2024/11/19 21:45:51 by misaguir         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:24:45 by misaguir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strlen(const char *c)
 
 	i = 0;
 	if (!c)
-		return(0);
+		return (0);
 	while (c[i])
 	{
 		i++;

@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/20 15:28:26 by misaguir          #+#    #+#             */
+/*   Updated: 2024/12/20 15:29:54 by misaguir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include "LIBFT/includes/libft.h"
 # include "MLX42_P2/include/MLX42/MLX42.h"
@@ -20,34 +32,34 @@
 
 typedef struct s_torch
 {
-	mlx_texture_t *frames[TORCH];
+	mlx_texture_t	*frames[TORCH];
 	mlx_image_t		*image;
-	int 			current_frame;
+	int				current_frame;
 	int				last_time;
-} t_torch;
+}	t_torch;
 
 typedef struct s_ray
 {
-	double ang;
-	double cos;
-	double sin;
-	double distance;
-	double sideDistX;
-	double sideDistY;
-	double deltaDistX;
-	double deltaDistY;
-	double wallX;
-	int side;
-	int stepX;
-	int stepY;
-	int mapX;
-	int mapY;
-	int texX;
-	int texY;
-	int	start;
-	int start_two;
-	int	end;
-	int end_two;
+	double	ang;
+	double	cos;
+	double	sin;
+	double	distance;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	wallX;
+	int		side;
+	int		stepX;
+	int		stepY;
+	int		mapX;
+	int		mapY;
+	int		texX;
+	int		texY;
+	int		start;
+	int		start_two;
+	int		end;
+	int		end_two;
 }	t_ray;
 
 typedef struct s_cub
