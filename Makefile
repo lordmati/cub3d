@@ -35,6 +35,7 @@ SRC_FILES = main \
 			torch_animation \
 			set_moves \
 			set_info \
+			ray_casting \
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o,$(SRC_FILES)))

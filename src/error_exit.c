@@ -1,32 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/20 16:18:41 by misaguir          #+#    #+#             */
+/*   Updated: 2024/12/20 16:20:04 by misaguir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Include/cub3D.h"
 
-void free_struc(t_cub *game)
+void	free_struc(t_cub *game)
 {
-	if(game->north)
+	if (game->north)
 		free(game->north);
-	if(game->south)
+	if (game->south)
 		free(game->south);
-	if(game->west)
+	if (game->west)
 		free(game->west);
-	if(game->east)
+	if (game->east)
 		free(game->east);
-	if(game->floor)
+	if (game->floor)
 		free(game->floor);
-	if(game->ceiling)
+	if (game->ceiling)
 		free(game->ceiling);
-	if(game->arr_ceiling)
+	if (game->arr_ceiling)
 		free(game->arr_ceiling);
-	if(game->arr_floor)
+	if (game->arr_floor)
 		free(game->arr_floor);
-	if(game->map)
+	if (game->map)
 		free_matrix(game->map);
-	return;
+	return ;
 }
 
-void error_msg(char *str,t_cub *game)
+void	error_msg(char *str, t_cub *game)
 {
 	if (game)
 		free_struc(game);
-	ft_putstr_fd(str,2);
+	ft_putstr_fd(str, 2);
 	exit(1);
 }
