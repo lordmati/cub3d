@@ -1,29 +1,41 @@
-#include "../Include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/27 14:15:46 by misaguir          #+#    #+#             */
+/*   Updated: 2024/12/27 14:16:47 by misaguir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../Include/cub3D.h"
 
 int	skip_spaces(char *str, int i)
 {
-	while(str[i] && str[i] == ' ')
+	while (str[i] && str[i] == ' ')
 		i++;
-	return(i);
+	return (i);
 }
-int count_comma(char *str)
+
+int	count_comma(char *str)
 {
-	int i;
-	int c;
+	int	i;
+	int	c;
 
 	i = 0;
 	c = 0;
-	while(str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] == ',')
 			c++;
 		i++;
 	}
-	return(c);
+	return (c);
 }
 
-void free_matrix(char **str)
+void	free_matrix(char **str)
 {
 	int	i;
 
@@ -35,7 +47,8 @@ void free_matrix(char **str)
 	}
 	free(str);
 }
-int rgb(int r,int g,int b, int a)
+
+int	rgb(int r, int g, int b, int a)
 {
-	return(r << 24 | g << 16 | b << 8 | a);
+	return (r << 24 | g << 16 | b << 8 | a);
 }

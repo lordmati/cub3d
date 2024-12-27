@@ -6,7 +6,7 @@
 /*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:28:26 by misaguir          #+#    #+#             */
-/*   Updated: 2024/12/20 16:21:40 by misaguir         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:17:58 by misaguir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	save_player(char c, int y, int x, t_cub *game);
 
 //valid_info
 void	valid_info(char *str, t_cub *game);
-int		*valid_numbers(char *str, t_cub *game);
+int		*valid_numbers(char *str, t_cub *game, int i);
 
 //set info
 void	set_paths(t_cub *game);

@@ -1,23 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_fd.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/27 14:01:50 by misaguir          #+#    #+#             */
+/*   Updated: 2024/12/27 14:06:46 by misaguir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Include/cub3D.h"
 
-void save_player(char c,int y,int x,t_cub *game)
+void	save_player(char c, int y, int x, t_cub *game)
 {
 	game->player_view = c;
 	game->y = y + 0.5;
 	game->x = x + 0.5;
 	game->player++;
 }
-void save_map(t_cub *game,char *file,int i, int j)
-{
-	int fd;
-	char *line;
 
-	fd = open(file,O_RDONLY);
+void	save_map(t_cub *game, char *file, int i, int j)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
 	line = ft_strdup("");
 	game->map = (char **)malloc(sizeof(char *) * (game->count_map));
 	if (!game->map)
-		error_msg("Error allocated malloc\n",game);
-	while(line)
+		error_msg("Error allocated malloc\n", game);
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -36,21 +49,21 @@ void save_map(t_cub *game,char *file,int i, int j)
 	close(fd);
 }
 
-void read_fd(char *file,t_cub *game)
+void	read_fd(char *file, t_cub *game)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
-	fd = open(file,O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		error_msg("Error: Open File\n",NULL);
+		error_msg("Error: Open File\n", NULL);
 	line = ft_strdup("");
-	while(line)
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line)
-			ft_check_line(line,game);
+			ft_check_line(line, game);
 		if (game->count_data == 6)
 			game->count_map++;
 		else

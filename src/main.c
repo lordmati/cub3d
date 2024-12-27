@@ -6,7 +6,7 @@
 /*   By: misaguir <misaguir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:24:40 by misaguir          #+#    #+#             */
-/*   Updated: 2024/12/20 16:26:00 by misaguir         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:18:05 by misaguir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	main(int argc, char **argv)
 	check_info(&game);
 	valid_info(game.ceiling, &game);
 	valid_info(game.floor, &game);
-	game.arr_ceiling = valid_numbers(game.ceiling, &game);
-	game.arr_floor = valid_numbers(game.floor, &game);
+	game.arr_ceiling = valid_numbers(game.ceiling, &game, 0);
+	game.arr_floor = valid_numbers(game.floor, &game, 0);
 	save_map(&game, argv[1], 0, 0);
 	check_caracter_map(game.map, &game);
 	check_valid_position_player(game.map, &game);
